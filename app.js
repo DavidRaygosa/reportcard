@@ -13,8 +13,8 @@ var project_routes = require('./routes/routes');
 
 // Middlewares
 
-app.use(urlencoded({extended:true},{limit: '50mb'}));
-app.use(json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({extended:true},{limit: '50mb'}));
+app.use(bodyParser.json({limit: '50mb'}));
 
 // CORS
 
