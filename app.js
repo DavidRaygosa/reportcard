@@ -1,20 +1,22 @@
 'use strict'
 
+const compression = require('compression')
 var express = require('express');
 const cors = require('cors');
 var bodyParser = require('body-parser');
 var path = require('path');
 
 var app = express();
-
+app.use(compression());
 // Load Routes
 
 var project_routes = require('./routes/routes');
 
 // Middlewares
 
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }));
+app.use(bodyParser.urlencoded({extended:true},{limit: '50mb'}));
 app.use(bodyParser.json({limit: '50mb'}));
+//app.use(express.limit('50mb'));
 
 // CORS
 
@@ -30,17 +32,18 @@ app.use((req, res, next) => // CORS Permite Respuesta Entre El Backend y El Fron
 // Route
 
 //THIS LINE TO LOCAL
-//app.use('/api',project_routes);
+app.use('/api',project_routes);
 
 
 // THIS LINE TO SERVER
-
+/*
 app.use('/', express.static('client', {redirect:false}));
 app.use('/api',project_routes);
 app.get('*', function(req,res,next)
 {
 	res.sendFile(path.resolve('client/index.html'));
 });
+*/
 
 // Export
 module.exports = app;
