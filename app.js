@@ -32,18 +32,16 @@ app.use((req, res, next) => // CORS Permite Respuesta Entre El Backend y El Fron
 // Route
 
 //THIS LINE TO LOCAL
-app.use('/api',project_routes);
+//app.use('/api',project_routes);
 
 
 // THIS LINE TO SERVER
-/*
 app.use('/', express.static('client', {redirect:false}));
 app.use('/api',project_routes);
 app.get('*', function(req,res,next)
 {
 	res.sendFile(path.resolve('client/index.html'));
 });
-*/
 
 // Export
 module.exports = app;
