@@ -3,7 +3,8 @@
 var mongoose = require('mongoose');
 var app = require('./app');
 var port = 3700;
-app.set('port', process.env.PORT || port)
+app.set('port', process.env.PORT || port);
+// SERVER TO AWS
 
 mongoose.Promise = global.Promise;
 
