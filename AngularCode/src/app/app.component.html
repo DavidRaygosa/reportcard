@@ -1,0 +1,67 @@
+<div id="login" class="col-12 my-font-face">
+  <div class="w-100 text-center">
+    <div *ngIf="!isLogged"><h2 class="d-inline text-muted typed" data-typed-items="Preparatoria 114"></h2></div>
+    <hr>
+  </div>
+  <div class="container my-container d-flex justify-content-center align-items-center col-12 mt-n5" data-aos="zoom-in-up" data-aos-duration="800">
+    <div id="form-container" class="p-5 rounded shadow border col-12 col-md-6 col-xl-4">
+      <form id="login-form" #loginform="ngForm" (submit)="onSubmit($event)">
+        <h1 class="d-block h3 text-center mb-3 my-font-face"> Ingresar</h1>
+        <input #loginUser type="text" id="inputEmail" class="form-control mb-4" placeholder="Usuario" name="userName" ngModel required>
+        <input #loginPassword type="password" id="inputPassword" class="form-control mb-4" placeholder="Contraseña" name="userPassword" ngModel required>
+        <button id="login-btn" class="btn btn-success btn-block" type="submit" [disabled]="!loginform.valid">
+          <div class="d-inline" *ngIf="!isLogging"><i class="fas fa-sign-in-alt"></i>Entrar</div>
+          <div class="d-inline" *ngIf="isLogging">
+            <div class="spinner-border text-light" role="status"></div>
+          </div>
+        </button>
+        <hr>
+        <div class="d-flex justify-content-center alert alert-danger" role="alert" *ngIf="loginError" data-aos="flip-up" data-aos-duration="800">
+          <small>¡Usuario y/o Contraseña Incorrectos!</small>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="dashboard" class="d-flex row my-container my-font-face h-100" *ngIf="isLogged">
+
+  <div id="responsive-button" class="position-fixed responsiveNavbar nooutline" *ngIf="responsive">
+    <button aria-label="menuIcon" class="text-primary nooutline" (click)="openNavBar()">
+      <h4 class="fas fa-bars nooutline"></h4>
+    </button>
+  </div>
+
+  <div id="navbarResponsive" class="col-10 h-100 col-lg-3 col-xl-2 hideNavbar">
+
+    <div id="nav-dashboard" class="position-fixed col-10 col-lg-3 col-xl-2 p-3 h-100 hideNavbar">
+      <div id="logo" class="logoheight w-100">
+          <a [routerLink]="['/']" (click)="closeNavBar()"><img id="my-logo" src="../assets/img/logo.png" class="d-block rounded mx-auto d-block rounded-circle logoImgHeight " width="45%" alt="Logo"></a>
+          <div class="text-white text-center mb-0 textImgHeight"><h5 class="d-inline typed2" data-typed-items="Preparatoria 114"></h5></div>
+          <hr class="d-block my-hr">
+      </div>
+      <div id="navbar" class="p-2 navLinksHeight text-nowrap">
+        <div class="aLinkHeight">
+          <a id="teacher-nav" class="d-block myp-2 mymb-3 w-100" [routerLink]="['/profesores']" (click)="closeNavBar()" ><i class="d-inline-block fas fa-id-badge navbar-li"></i><h5 class="d-inline-block ml-2 my-font-face navbar-h6">Profesores</h5></a>
+          <a id="counselor-nav" class="d-block myp-2 mymb-3 w-100" [routerLink]="['/orientadores']" (click)="closeNavBar()"><i class="fas fa-id-card navbar-li"></i><h5 class="d-inline-block ml-2 my-font-face navbar-h6">Orientadores</h5></a>
+          <a id="groups-nav" class="d-block myp-2 mymb-3 w-100" [routerLink]="['/grupos']" (click)="closeNavBar()"><i class="fas fa-users navbar-li"></i><h5 class="d-inline-block ml-2 my-font-face navbar-h6">Grupos</h5></a>
+          <a id="report-nav" class="d-block myp-2 mymb-3 w-100" [routerLink]="['/reportes']" (click)="closeNavBar()"><i class="fas fa-clipboard-list navbar-li"></i><h5 class="d-inline-block ml-2 my-font-face navbar-h6">Reportes</h5></a>     
+        </div>
+        <div class="d-flex align-items-end settingLinkHeight">
+          <div class="w-100">
+            <a id="settings-nav" class="d-block myp-2 mymb-3" [routerLink]="['/ajustes']" (click)="closeNavBar()"><i class="fas fa-cogs navbar-li"></i><h5 class="d-inline-block ml-2 my-font-face navbar-h6">Ajustes</h5></a>
+            <button class="d-block btn btn-danger w-100" (click)="closeSession()">Cerrar Sesion</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div id="panel-dashboard" class="col-lg-9 col-xl-10 p-4 nooutline"> <!--IT HAD A "tabindex='1'"-->
+    <div class="myoverflow container-fluid w-100">
+      <router-outlet></router-outlet>   
+    </div>
+          
+  </div>
+</div>

@@ -1,0 +1,801 @@
+<div class="h-50 d-flex justify-content-center align-items-center" *ngIf="loading">
+    <div class="spinner-border text-primary" role="status">
+    </div>
+</div>
+<div *ngIf="!loading" class="w-100">
+
+    <div class="d-flex justify-content-center alert alert-danger" role="alert" *ngIf="duplicated" data-aos="fade-up" data-aos-duration="800">
+        Acción denegada por "DUPLICADO".
+      </div>
+
+    <div class="d-block d-md-flex align-items-center justify-content-start mt-2 p-1 col-12">
+        <button class="btn border-primary text-muted rounded-circle my-back-button mr-4 w-25" [routerLink]="['/grupos']"><small><i class="fas fa-arrow-left"></i></small></button>
+        <h2 class="fw-bold text-muted col-12 col-md-7"> <b #title class="typedGroup"></b></h2>
+        <div class="input-group w-100 mb-3 col-12 col-md-4 justify-content-center align-items-center">
+            <div class="d-none d-xl-inline input-group-prepend ml-5">
+                <label class="input-group-text" for="inputGroupSelect01">Orientador</label>
+            </div>
+            <select #CounselorSelect class="custom-select" id="inputGroupSelect01" (change)='onChangeSelectCounselor(CounselorSelect.value)'>
+                <option selected [value]="0">{{CurrentCounselor}}</option>
+                <option *ngFor="let counselor of counselors" [value]="counselor._id">{{counselor.name}} {{counselor.lastnamep}}</option>
+            </select>
+            </div>
+    </div>
+    <hr>
+    <div id="table">
+        <table class="table table-bordered" *ngIf="!reloadTable">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col" class="text-center">#</th>
+                    <th scope="col" class="text-center">Lunes</th>
+                    <th scope="col" class="text-center">Martes</th>
+                    <th scope="col" class="text-center">Miercoles</th>
+                    <th scope="col" class="text-center">Jueves</th>
+                    <th scope="col" class="text-center">Viernes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <!--*********** FILA 1 *******************-->
+                    <th scope="row" class="text-center">1</th>
+                    <td>
+                        <select id="Monday1Teacher" #Monday1Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Monday1Teacher.value, Monday1Subject, Monday1SubjectReadOnly, 1)'>
+                            <option [value]="0">Profesor</option>
+                            <option [value]="1">ORIENTACION</option>
+                            <option [value]="2">HORA LIBRE</option>
+                            <option [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly1">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Monday1SubjectReadOnly> 
+                            </div>
+                            <select #Monday1Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly1" (change)='onChangeSelectSubject(Monday1Teacher.value, "MONDAY", 1, Monday1Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectMonday1" [value]="subject">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Tuesday1Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Tuesday1Teacher.value, Tuesday1Subject, Tuesday1SubjectReadOnly, 2)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly2">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Tuesday1SubjectReadOnly> 
+                            </div>
+                            <select #Tuesday1Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly2" (change)='onChangeSelectSubject(Tuesday1Teacher.value, "TUESDAY", 1, Tuesday1Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectTuesday1">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Wednesday1Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Wednesday1Teacher.value, Wednesday1Subject, Wednesday1SubjectReadOnly, 3)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly3">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Wednesday1SubjectReadOnly> 
+                            </div>
+                            <select #Wednesday1Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly3" (change)='onChangeSelectSubject(Wednesday1Teacher.value, "WEDNESDAY", 1, Wednesday1Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectWednesday1">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Thursday1Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Thursday1Teacher.value, Thursday1Subject, Thursday1SubjectReadOnly, 4)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly4">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Thursday1SubjectReadOnly> 
+                            </div>
+                            <select #Thursday1Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly4" (change)='onChangeSelectSubject(Thursday1Teacher.value, "THURSDAY", 1, Thursday1Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectThursday1">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Friday1Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Friday1Teacher.value, Friday1Subject, Friday1SubjectReadOnly, 5)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly5">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Friday1SubjectReadOnly> 
+                            </div>
+                            <select #Friday1Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly5" (change)='onChangeSelectSubject(Friday1Teacher.value, "FRIDAY", 1, Friday1Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectFriday1">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!--*********** FILA 2 *******************-->
+                    <th scope="row" class="text-center">2</th>
+                    <td>
+                        <select #Monday2Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Monday2Teacher.value, Monday2Subject, Monday2SubjectReadOnly, 6)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly6">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Monday2SubjectReadOnly> 
+                            </div>
+                            <select #Monday2Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly6" (change)='onChangeSelectSubject(Monday2Teacher.value, "MONDAY", 2, Monday2Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectMonday2">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Tuesday2Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Tuesday2Teacher.value, Tuesday2Subject, Tuesday2SubjectReadOnly, 7)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly7">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Tuesday2SubjectReadOnly> 
+                            </div>
+                            <select #Tuesday2Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly7" (change)='onChangeSelectSubject(Tuesday2Teacher.value, "TUESDAY", 2, Tuesday2Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectTuesday2">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Wednesday2Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Wednesday2Teacher.value, Wednesday2Subject, Wednesday2SubjectReadOnly, 8)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly8">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Wednesday2SubjectReadOnly> 
+                            </div>
+                            <select #Wednesday2Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly8" (change)='onChangeSelectSubject(Wednesday2Teacher.value, "WEDNESDAY", 2, Wednesday2Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectWednesday2">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Thursday2Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Thursday2Teacher.value, Thursday2Subject, Thursday2SubjectReadOnly, 9)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly9">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Thursday2SubjectReadOnly> 
+                            </div>
+                            <select #Thursday2Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly9" (change)='onChangeSelectSubject(Thursday2Teacher.value, "THURSDAY", 2, Thursday2Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectThursday2">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Friday2Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Friday2Teacher.value, Friday2Subject, Friday2SubjectReadOnly, 10)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly10">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Friday2SubjectReadOnly> 
+                            </div>
+                            <select #Friday2Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly10" (change)='onChangeSelectSubject(Friday2Teacher.value, "FRIDAY", 2, Friday2Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectFriday2">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!--*********** FILA 3 *******************-->
+                    <th scope="row" class="text-center">3</th>
+                    <td>
+                        <select #Monday3Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Monday3Teacher.value, Monday3Subject, Monday3SubjectReadOnly, 11)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly11">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Monday3SubjectReadOnly> 
+                            </div>
+                            <select #Monday3Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly11" (change)='onChangeSelectSubject(Monday3Teacher.value, "MONDAY", 3, Monday3Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectMonday3">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Tuesday3Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Tuesday3Teacher.value, Tuesday3Subject, Tuesday3SubjectReadOnly, 12)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly12">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Tuesday3SubjectReadOnly> 
+                            </div>
+                            <select #Tuesday3Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly12" (change)='onChangeSelectSubject(Tuesday3Teacher.value, "TUESDAY", 3, Tuesday3Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectTuesday3">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Wednesday3Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Wednesday3Teacher.value, Wednesday3Subject, Wednesday3SubjectReadOnly, 13)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly13">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Wednesday3SubjectReadOnly> 
+                            </div>
+                            <select #Wednesday3Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly13" (change)='onChangeSelectSubject(Wednesday3Teacher.value, "WEDNESDAY", 3, Wednesday3Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectWednesday3">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Thursday3Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Thursday3Teacher.value, Thursday3Subject, Thursday3SubjectReadOnly, 14)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly14">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Thursday3SubjectReadOnly> 
+                            </div>
+                            <select #Thursday3Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly14" (change)='onChangeSelectSubject(Thursday3Teacher.value, "THURSDAY", 3, Thursday3Subject.value)'> 
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectThursday3">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Friday3Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Friday3Teacher.value, Friday3Subject, Friday3SubjectReadOnly, 15)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly15">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Friday3SubjectReadOnly> 
+                            </div>
+                            <select #Friday3Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly15" (change)='onChangeSelectSubject(Friday3Teacher.value, "FRIDAY", 3, Friday3Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectFriday3">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!--*********** FILA 4 *******************-->
+                    <th scope="row" class="text-center">4</th>
+                    <td>
+                        <select #Monday4Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Monday4Teacher.value, Monday4Subject, Monday4SubjectReadOnly, 16)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly16">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Monday4SubjectReadOnly> 
+                            </div>
+                            <select #Monday4Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly16" (change)='onChangeSelectSubject(Monday4Teacher.value, "MONDAY", 4, Monday4Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectMonday4">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Tuesday4Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Tuesday4Teacher.value, Tuesday4Subject, Tuesday4SubjectReadOnly, 17)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly17">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Tuesday4SubjectReadOnly> 
+                            </div>
+                            <select #Tuesday4Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly17" (change)='onChangeSelectSubject(Tuesday4Teacher.value, "TUESDAY", 4, Tuesday4Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectTuesday4">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Wednesday4Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Wednesday4Teacher.value, Wednesday4Subject, Wednesday4SubjectReadOnly, 18)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly18">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Wednesday4SubjectReadOnly> 
+                            </div>
+                            <select #Wednesday4Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly18" (change)='onChangeSelectSubject(Wednesday4Teacher.value, "WEDNESDAY", 4, Wednesday4Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectWednesday4">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Thursday4Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Thursday4Teacher.value, Thursday4Subject, Thursday4SubjectReadOnly, 19)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly19">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Thursday4SubjectReadOnly> 
+                            </div>
+                            <select #Thursday4Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly19" (change)='onChangeSelectSubject(Thursday4Teacher.value, "THURSDAY", 4, Thursday4Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectThursday4">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Friday4Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Friday4Teacher.value, Friday4Subject, Friday4SubjectReadOnly, 20)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly20">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Friday4SubjectReadOnly> 
+                            </div>
+                            <select #Friday4Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly20" (change)='onChangeSelectSubject(Friday4Teacher.value, "FRIDAY", 4, Friday4Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectFriday4">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!--*********** RECESO *******************-->
+                    <th scope="row" class="text-center">**</th>
+                    <td colspan="5" class="text-center text-muted"><b>RECESO</b></td>
+                </tr>
+                <tr>
+                    <th scope="row" class="text-center">5</th>
+                    <td>
+                        <select #Monday5Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Monday5Teacher.value, Monday5Subject, Monday5SubjectReadOnly, 21)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly21">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Monday5SubjectReadOnly> 
+                            </div>
+                            <select #Monday5Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly21" (change)='onChangeSelectSubject(Monday5Teacher.value, "MONDAY", 5, Monday5Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectMonday5">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Tuesday5Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Tuesday5Teacher.value, Tuesday5Subject, Tuesday5SubjectReadOnly, 22)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly22">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Tuesday5SubjectReadOnly> 
+                            </div>
+                            <select #Tuesday5Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly22" (change)='onChangeSelectSubject(Tuesday5Teacher.value, "TUESDAY", 5, Tuesday5Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectTuesday5">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Wednesday5Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Wednesday5Teacher.value, Wednesday5Subject, Wednesday5SubjectReadOnly, 23)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly23">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Wednesday5SubjectReadOnly> 
+                            </div>
+                            <select #Wednesday5Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly23" (change)='onChangeSelectSubject(Wednesday5Teacher.value, "WEDNESDAY", 5, Wednesday5Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectWednesday5">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Thursday5Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Thursday5Teacher.value, Thursday5Subject, Thursday5SubjectReadOnly, 24)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly24">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Thursday5SubjectReadOnly> 
+                            </div>
+                            <select #Thursday5Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly24" (change)='onChangeSelectSubject(Thursday5Teacher.value, "THURSDAY", 5, Thursday5Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectThursday5">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Friday5Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Friday5Teacher.value, Friday5Subject, Friday5SubjectReadOnly, 25)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly25">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Friday5SubjectReadOnly> 
+                            </div>
+                            <select #Friday5Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly25" (change)='onChangeSelectSubject(Friday5Teacher.value, "FRIDAY", 5, Friday5Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectFriday5">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!--*********** FILA 6 *******************-->
+                    <th scope="row" class="text-center">6</th>
+                    <td>
+                        <select #Monday6Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Monday6Teacher.value, Monday6Subject, Monday6SubjectReadOnly, 26)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly26">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Monday6SubjectReadOnly> 
+                            </div>
+                            <select #Monday6Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly26" (change)='onChangeSelectSubject(Monday6Teacher.value, "MONDAY", 6, Monday6Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectMonday6">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Tuesday6Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Tuesday6Teacher.value, Tuesday6Subject, Tuesday6SubjectReadOnly, 27)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly27">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Tuesday6SubjectReadOnly> 
+                            </div>
+                            <select #Tuesday6Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly27" (change)='onChangeSelectSubject(Tuesday6Teacher.value, "TUESDAY", 6, Tuesday6Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectTuesday6">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Wednesday6Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Wednesday6Teacher.value, Wednesday6Subject, Wednesday6SubjectReadOnly, 28)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly28">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Wednesday6SubjectReadOnly> 
+                            </div>
+                            <select #Wednesday6Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly28" (change)='onChangeSelectSubject(Wednesday6Teacher.value, "WEDNESDAY", 6, Wednesday6Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectWednesday6">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Thursday6Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Thursday6Teacher.value, Thursday6Subject, Thursday6SubjectReadOnly, 29)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly29">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Thursday6SubjectReadOnly> 
+                            </div>
+                            <select #Thursday6Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly29" (change)='onChangeSelectSubject(Thursday6Teacher.value, "THURSDAY", 6, Thursday6Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectThursday6">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Friday6Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Friday6Teacher.value, Friday6Subject, Friday6SubjectReadOnly, 30)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly30">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Friday6SubjectReadOnly> 
+                            </div>
+                            <select #Friday6Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly30" (change)='onChangeSelectSubject(Friday6Teacher.value, "FRIDAY", 6, Friday6Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectFriday6">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!--*********** FILA 7 *******************-->
+                    <th scope="row" class="text-center">7</th>
+                    <td>
+                        <select #Monday7Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Monday7Teacher.value, Monday7Subject, Monday7SubjectReadOnly, 31)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly31">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Monday7SubjectReadOnly> 
+                            </div>
+                            <select #Monday7Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly31" (change)='onChangeSelectSubject(Monday7Teacher.value, "MONDAY", 7, Monday7Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectMonday7">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Tuesday7Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Tuesday7Teacher.value, Tuesday7Subject, Tuesday7SubjectReadOnly, 32)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly32">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Tuesday7SubjectReadOnly> 
+                            </div>
+                            <select #Tuesday7Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly32" (change)='onChangeSelectSubject(Tuesday7Teacher.value, "TUESDAY", 7, Tuesday7Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectTuesday7">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Wednesday7Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Wednesday7Teacher.value, Wednesday7Subject, Wednesday7SubjectReadOnly, 33)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly33">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Wednesday7SubjectReadOnly> 
+                            </div>
+                            <select #Wednesday7Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly33" (change)='onChangeSelectSubject(Wednesday7Teacher.value, "WEDNESDAY", 7, Wednesday7Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectWednesday7">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Thursday7Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Thursday7Teacher.value, Thursday7Subject, Thursday7SubjectReadOnly, 34)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly34">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Thursday7SubjectReadOnly> 
+                            </div>
+                            <select #Thursday7Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly34" (change)='onChangeSelectSubject(Thursday7Teacher.value, "THURSDAY", 7, Thursday7Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectThursday7">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Friday7Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Friday7Teacher.value, Friday7Subject, Friday7SubjectReadOnly, 35)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly35">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Friday7SubjectReadOnly> 
+                            </div>
+                            <select #Friday7Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly35" (change)='onChangeSelectSubject(Friday7Teacher.value, "FRIDAY", 7, Friday7Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectFriday7">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <!--*********** FILA 8 *******************-->
+                    <th scope="row" class="text-center">8</th>
+                    <td>
+                        <select #Monday8Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Monday8Teacher.value, Monday8Subject, Monday8SubjectReadOnly, 36)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly36">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Monday8SubjectReadOnly> 
+                            </div>
+                            <select #Monday8Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly36" (change)='onChangeSelectSubject(Monday8Teacher.value, "MONDAY", 8, Monday8Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectMonday8">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Tuesday8Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Tuesday8Teacher.value, Tuesday8Subject, Tuesday8SubjectReadOnly, 37)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly37">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Tuesday8SubjectReadOnly> 
+                            </div>
+                            <select #Tuesday8Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly37" (change)='onChangeSelectSubject(Tuesday8Teacher.value, "TUESDAY", 8, Tuesday8Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectTuesday8">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Wednesday8Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Wednesday8Teacher.value, Wednesday8Subject, Wednesday8SubjectReadOnly, 38)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly38">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Wednesday8SubjectReadOnly> 
+                            </div>
+                            <select #Wednesday8Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly38" (change)='onChangeSelectSubject(Wednesday8Teacher.value, "WEDNESDAY", 8, Wednesday8Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectWednesday8">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Thursday8Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Thursday8Teacher.value, Thursday8Subject, Thursday8SubjectReadOnly, 39)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly39">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Thursday8SubjectReadOnly> 
+                            </div>
+                            <select #Thursday8Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly39" (change)='onChangeSelectSubject(Thursday8Teacher.value, "THURSDAY", 8, Thursday8Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectThursday8">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <select #Friday8Teacher class="form-select w-100 border-0 my-select" (change)='onChangeSelect(Friday8Teacher.value, Friday8Subject, Friday8SubjectReadOnly, 40)'>
+                            <option selected [value]="0">Profesor</option>
+                            <option selected [value]="1">ORIENTACION</option>
+                            <option selected [value]="2">HORA LIBRE</option>
+                            <option selected [value]="3">-----------</option>
+                            <option *ngFor="let teacher of teacher" [value]="teacher._id">{{teacher.name}} {{teacher.lastnamep}}</option>
+                        </select>
+                        <div class="mt-2">
+                            <div [hidden]="!isReadOnly40">
+                                <input type="text" class="my-input" value="MATERIA" readonly #Friday8SubjectReadOnly> 
+                            </div>
+                            <select #Friday8Subject class="form-select w-100 border-0 my-select" [hidden]="isReadOnly40" (change)='onChangeSelectSubject(Friday8Teacher.value, "FRIDAY", 8, Friday8Subject.value)'>
+                                <option selected [value]="0">MATERIA</option>
+                                <option *ngFor="let subject of subjectFriday8">{{subject}}</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="h-50 d-flex justify-content-center align-items-center" *ngIf="reloadTable">
+            <div class="spinner-border text-primary" role="status">
+            </div>
+        </div>
+    </div>
+</div>

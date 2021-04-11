@@ -1,0 +1,62 @@
+#my-gif-box
+{
+    height: 200px;
+}
+
+#fixed-message
+{
+    width: 18%;
+    right: 0%;
+    bottom: 0%;
+    height: 80px;
+    animation: downloading 500ms linear;
+}
+
+.myoverflow
+{
+    overflow: hidden;
+}
+
+.myModal
+{
+    width: 100% !important;
+}
+
+@media (min-width: 576px) {
+    .myModal
+    {
+        width: 100% !important;
+    }  
+}
+
+@media (min-width: 992px) {
+    .myModal
+    {
+        width: 30% !important;
+    }  
+}
+
+@media (min-width: 1200px) {
+    .myModal
+    {
+        width: 25% !important;
+    }  
+ }
+
+@keyframes downloading
+{
+    0%
+    {
+        bottom: -10%;
+        opacity: 0.5;
+    }
+    80%
+    {
+        opacity: 1;
+    }
+    100%
+    {
+        bottom: 0%;
+        opacity: 1;
+    }
+}
