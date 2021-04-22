@@ -11,6 +11,7 @@ var CounselorController = require('../controllers/counselor.controller');
 var GroupController = require('../controllers/group.controller');
 var LogosController = require('../controllers/logos.controller');
 var GeneralHourController = require('../controllers/generalhor.controller');
+var PushController = require('../controllers/push.controller');
 var router = express.Router();
 
 // MiddleWare
@@ -26,7 +27,8 @@ var multipartMiddleWare = multipart({uploadDir: './uploads'});
 		router.put('/update-general/:id',GeneralController.updateGeneral);
 
 	// Users
-		router.get('/get-user/:user?', UserController.getUser); //*******/
+		router.post('/login', UserController.login); // RETURN TOKEN
+		router.get('/get-user/:user', UserController.getUser);
 
 	// Teachers
 		router.post('/create-teacher', TeacherController.createTeacher);
@@ -56,11 +58,15 @@ var multipartMiddleWare = multipart({uploadDir: './uploads'});
 		router.get('/get-groups', GroupController.getGroups);
 
 	// Logos
-	router.put('/update-logo/:id',LogosController.updateLogo);
-	router.get('/get-logos', LogosController.getLogos);
+		router.put('/update-logo/:id',LogosController.updateLogo);
+		router.get('/get-logos', LogosController.getLogos);
 
 	// GENERAL HOURS
 		router.post('/create-general', multipartMiddleWare, GeneralHourController.generateExcel);
 		router.get('/download-file/:fileName?/:isPDF?', GeneralHourController.getFile);
+
+	// PUSH NOTIFICATIONS
+	router.post('/save-push', PushController.savePush);
+	router.post('/send-push', PushController.sendPush);
 		
 module.exports = router;
