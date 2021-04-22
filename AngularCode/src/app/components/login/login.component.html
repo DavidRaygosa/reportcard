@@ -1,0 +1,25 @@
+<div id="login" class="my-width my-font-face no-overflow">
+    <div class="w-100 text-center">
+      <div><h2 class="d-inline text-muted typed-login" data-typed-items="Preparatoria 114"></h2></div>
+      <hr>
+    </div>
+    <div class="container my-container d-flex justify-content-center align-items-center col-12 mt-n5" data-aos="zoom-in-up" data-aos-duration="800">
+      <div id="form-container" class="p-5 rounded shadow border col-12 col-md-6 col-xl-4">
+        <form id="login-form" #loginform="ngForm" (submit)="onSubmit($event)">
+          <h1 class="d-block h3 text-center mb-3 my-font-face"> Ingresar</h1>
+          <input #loginUser type="text" id="inputEmail" class="form-control mb-4" placeholder="Usuario" name="userName" ngModel required>
+          <input #loginPassword type="password" id="inputPassword" class="form-control mb-4" placeholder="Contraseña" name="userPassword" ngModel required>
+          <button id="login-btn" class="btn btn-success btn-block" type="submit" [disabled]="!loginform.valid">
+            <div class="d-inline" *ngIf="!isLogging"><i class="fas fa-sign-in-alt"></i>Entrar</div>
+            <div class="d-inline" *ngIf="isLogging">
+              <div class="spinner-border text-light" role="status"></div>
+            </div>
+          </button>
+          <hr>
+          <div class="d-flex justify-content-center alert alert-danger" role="alert" *ngIf="loginError" data-aos="flip-up" data-aos-duration="800">
+            <small>¡Usuario y/o Contraseña Incorrectos!</small>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

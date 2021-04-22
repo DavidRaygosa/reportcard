@@ -1,0 +1,68 @@
+<div class="mt-5">
+    <h1 class="fw-bold text-muted"><b class="typedReport" data-typed-items="Reportes"></b></h1>
+    <hr>
+</div>
+<h2 class="d-block text-muted w-100">Horario General</h2>
+<div class="d-block d-sm-flex col-12 justify-content-between mb-4">
+    <div class="h-100 card col-12 col-sm-6 col-xl-4 mb-2 mb-sm-0 mr-sm-2" data-aos="fade-right" data-aos-duration="800">
+        <img class="card-img-top" src="../../../assets/img/GeneralReportLogo.PNG" alt="Card image cap">
+        <div class="card-body">
+          <h6 class="card-title font-weight-bold">Horario General - Matutino</h6>
+          <p class="card-text">Descarga el horario general matutino en Excel o PDF.</p>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-success" (click)="generateGeneralExcel('MATUTINO', false)" [disabled]="downloading">Excel</button>
+            <button class="btn btn-danger" (click)="generateGeneralExcel('MATUTINO', true)" [disabled]="downloading">PDF</button>
+          </div>
+        </div>
+    </div>
+    
+    <div class="h-100 card col-12 col-sm-6 col-xl-4" data-aos="fade-left" data-aos-duration="800">
+        <img class="card-img-top" src="../../../assets/img/GeneralReportLogo.PNG" alt="Card image cap">
+        <div class="card-body">
+          <h6 class="card-title font-weight-bold">Horario General - Vespertino</h6>
+          <p class="card-text">Descarga el horario general vespertino en Excel o PDF.</p>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-success" (click)="generateGeneralExcel('VESPERTINO', false)" [disabled]="downloading">Excel</button>
+            <button class="btn btn-danger" (click)="generateGeneralExcel('VESPERTINO', true)" [disabled]="downloading">PDF</button>
+          </div>
+        </div>
+    </div>
+</div>
+<!--************************ INDIVIDUAL ***********************-->
+<hr>
+<h2 class="d-block text-muted w-100">Horario Individual</h2>
+<div class="d-block d-sm-flex col-12 justify-content-between myoverflow">
+    <div class="h-100 card col-12 col-sm-6 col-xl-4 mb-2 mb-sm-0 mr-sm-2" data-aos="fade-right" data-aos-duration="800">
+        <img class="card-img-top" src="../../../assets/img/IndividualReportLogo.PNG" alt="Card image cap">
+        <div class="card-body">
+          <h6 class="card-title font-weight-bold">Horario Individual - Matutino</h6>
+          <p class="card-text">Descarga el horario individual matutino en Excel o PDF.</p>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-success" (click)="generateIndividualExcel('MATUTINO', false)" [disabled]="downloading">Excel</button>
+            <button class="btn btn-danger" (click)="generateIndividualExcel('MATUTINO', true)" [disabled]="downloading">PDF</button>
+          </div>
+        </div>
+    </div>
+    
+    <div class="h-100 card col-12 col-sm-6 col-xl-4" data-aos="fade-left" data-aos-duration="800">
+        <img class="card-img-top" src="../../../assets/img/IndividualReportLogo.PNG" alt="Card image cap">
+        <div class="card-body">
+          <h6 class="card-title font-weight-bold">Horario Individual - Vespertino</h6>
+          <p class="card-text">Descarga el horario individual vespertino en Excel o PDF.</p>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-success" (click)="generateIndividualExcel('VESPERTINO', false)" [disabled]="downloading">Excel</button>
+            <button class="btn btn-danger" (click)="generateIndividualExcel('VESPERTINO', true)" [disabled]="downloading">PDF</button>
+          </div>
+        </div>
+    </div>
+</div>
+<!--****************** MODALS *******************************-->
+
+<div id="fixed-message" class="d-flex position-fixed bg-info border rounded-top p-2 myModal" *ngIf="downloading">
+  <div id="my-gif-box" class="d-flex justify-content-end align-items-center w-25 h-100">
+    <img src="../../../assets/img/crafting.gif" class="img-thumbnail h-100 rounded mx-auto d-block">
+  </div>
+  <div class="d-flex justify-content-start align-items-center w-75 h-100 text-white">
+    {{downloading_message}}
+  </div>
+</div>

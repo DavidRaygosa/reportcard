@@ -1,0 +1,351 @@
+/*--------------------------------------------------------------
+# General Styles
+--------------------------------------------------------------*/
+.my-container
+{
+    height: 100vh !important;
+}
+
+//***************** DASHBOARD *****************
+
+#dashboard
+{
+    width: 100.8%;
+}
+
+#nav-dashboard
+{
+    position: fixed;
+    background-color: #040b14;
+}
+
+#panel-dashboard
+{
+    background-color: rgba($color: #FFFFFF, $alpha: 1.0);
+}
+
+.myoverflow
+{
+    overflow-x: hidden;
+}
+
+.mywidth
+{
+    width: 15%;
+}
+
+.mywidthContainer
+{
+    width: 85%;
+}
+
+#my-logo
+{
+    background-color: rgb(255, 255, 255);
+    border: 8px solid #2c2f3f;
+}
+
+.text-white
+{
+    color: rgba($color: #DBDBDB, $alpha: 1.0);
+}
+
+.my-hr
+{
+    width: 100%;
+    border: 1px solid rgb(104, 104, 104);
+}
+
+#navbar
+{
+    height: 80%;
+}
+
+#navbar a
+{
+    cursor: pointer;
+    transition: all 300ms;
+}
+
+.navbar-li
+{
+    width: 20%;
+    text-align: center;
+    color: rgba($color: #DBDBDB, $alpha: 0.6);
+}
+
+.navbar-h6
+{
+    color: rgba($color: #DBDBDB, $alpha: 0.6);
+}
+
+#navbar a:hover i
+{
+    color: rgba($color: #149ddd, $alpha: 1.0);
+}
+
+#navbar a:hover i h5
+{
+    color: rgba($color: #DBDBDB, $alpha: 1.0);
+}
+
+.my-font-face
+{
+    font-family: Roboto-Light;
+}
+
+.nav-selected .navbar-li
+{
+    color: rgba($color: #149ddd, $alpha: 1.0) !important;
+}
+
+.nav-selected .navbar-h6
+{
+    color: rgba($color: #DBDBDB, $alpha: 1.0) !important;
+}
+
+.nooutline
+{
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.nooutline:focus
+{
+    outline:none !important;
+}
+
+//***************** RESPONSIVE *****************
+
+.responsiveNavbar
+{
+    top: 1%;
+    left: 1%;
+    z-index: 1;
+}
+
+#navbarResponsive
+{
+    position: fixed;
+    z-index: 9;
+}
+
+.logoheight
+{
+    height: 25%;
+}
+
+.logoImgHeight
+{
+    height: 58%;
+}
+
+.textImgHeight
+{
+    height: 15%;
+    margin-top: 1.5rem;
+}
+
+.navLinksHeight
+{
+    height: 50%;
+}
+
+.aLinkHeight
+{
+    height: 65%;
+}
+
+.settingLinkHeight
+{
+    height: 25%;
+}
+
+.mymb-3
+{
+    margin-bottom: 1rem;
+}
+
+.myp-2
+{
+    padding: .5rem;
+}
+
+@media (orientation: landscape) {
+    .logoheight
+    {
+        height: 24%;
+    }
+    
+    .logoImgHeight
+    {
+        height: 64%;
+        width: 15% !important;
+    }
+
+    .textImgHeight
+    {
+        height: 15%;
+        margin-top: 0;
+    }
+    
+    .navLinksHeight
+    {
+        height: 0%;
+    }
+    
+    .aLinkHeight
+    {
+        height: 100%;
+    }
+    
+    .settingLinkHeight
+    {
+        height: 0%;
+    } 
+
+    .mymb-3
+    {
+        margin-bottom: 0;
+    }
+    
+    .myp-2
+    {
+        padding: 0;
+    }
+ }
+
+
+ @media (max-width: 655px) and (max-width: 300px) and (orientation: landscape)
+ {
+    .myp-2
+    {
+        padding: 0;
+    }  
+ }
+
+@media (min-width: 768px) {
+    .logoheight
+    {
+        height: 25%;
+    }
+    
+    .logoImgHeight
+    {
+        height: 50%;
+    }
+
+    .textImgHeight
+    {
+        height: 25%;
+    }
+    
+    .navLinksHeight
+    {
+        height: 50%;
+    }
+    
+    .aLinkHeight
+    {
+        height: 75%;
+    }
+    
+    .settingLinkHeight
+    {
+        height: 25%;
+    } 
+ }
+
+ @media (min-width: 768px) {
+    .logoheight
+    {
+        height: 25%;
+    }
+    
+    .logoImgHeight
+    {
+        height: 75%;
+    }
+
+    .textImgHeight
+    {
+        height: 25%;
+    }
+    
+    .navLinksHeight
+    {
+        height: 50%;
+    }
+    
+    .aLinkHeight
+    {
+        height: 70%;
+        margin-top: 3rem;
+    }
+    
+    .settingLinkHeight
+    {
+        height: 15%;
+    } 
+ }
+
+@media (min-width: 992px){
+
+    .logoheight
+    {
+        height: 25%;
+    }
+
+    .logoImgHeight
+    {
+        width: 50% !important;
+        height: 50%;
+    }
+
+    .textImgHeight
+    {
+        height: 15%;
+        margin-top: 1.5rem;
+    }
+
+    .navLinksHeight
+    {
+        height: 50%;
+    }
+
+    .aLinkHeight
+    {
+        height: 65%;
+    }
+
+    .settingLinkHeight
+    {
+        height: 25%;
+    }
+
+    .mymb-3
+    {
+        margin-bottom: 1rem;
+    }
+
+    .myp-2
+    {
+        padding: .5rem;
+    }
+
+    #navbar
+    {
+        height: 72%;
+    }
+    
+    #navbarResponsive
+    {
+        position: relative;
+    }
+
+    #nav-dashboard
+    {
+        position: relative;
+    }
+}

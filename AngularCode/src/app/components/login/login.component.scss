@@ -1,0 +1,40 @@
+.my-container
+{
+    height: 80vh !important;
+}
+
+.my-width{
+    width: 120%;
+}
+
+#form-container
+{
+    background-color: #F3F3F3;
+    width: 35%;
+}
+
+.my-font-face
+{
+    font-family: Roboto-Light;
+}
+
+#login
+{
+    overflow: hidden;
+}
+
+#login-form > h1
+{
+    color: #706767;
+}
+
+#login-btn[disabled]
+{
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) { 
+    .my-width{
+        width: 108%;
+    }
+}

@@ -1,0 +1,37 @@
+.custom-file-label::after { content: "Buscar" !important;}
+
+.my-alert
+{
+    bottom: 0%;
+    left: 0%;
+    animation: appearMessage 800ms linear;
+}
+
+.my-i
+{
+    font-size: 60px;
+}
+
+.myoverflow
+{
+    overflow: hidden;
+}
+
+@keyframes appearMessage
+{
+    0%
+    {
+        bottom: -10%;
+        opacity: 0.5;
+    }
+    80%
+    {
+        bottom: 0.2%;
+        opacity: 1;
+    }
+    100%
+    {
+        bottom: 0%;
+        opacity: 1;
+    }
+}

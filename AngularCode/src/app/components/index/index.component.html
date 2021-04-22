@@ -1,0 +1,13 @@
+<div class="mt-5 w-100">
+    <h4 class="fw-bold text-muted"><b class="typedIndex" data-typed-items="Preparatoria 114 - Dashboard"></b></h4>
+    <hr>
+</div>
+<div class="h-50 d-flex justify-content-center align-items-center" *ngIf="loading">
+    <div class="spinner-border text-primary" role="status">
+    </div>
+</div>
+<div class="w-100 mx-auto" *ngIf="!loading">
+    <div class="col-12" data-aos="zoom-in" data-aos-duration="800">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>

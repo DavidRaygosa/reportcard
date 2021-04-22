@@ -1,0 +1,33 @@
+.my-select
+{
+    outline-style: none;
+}
+
+#table
+{
+    overflow-x: scroll;
+}
+
+.my-controls
+{
+    width: 50%;
+}
+
+.my-back-button
+{
+    width: 5%;
+    height: 50px;
+}
+
+.my-back-button:hover
+{
+    background-color: #0D6EFD;
+    color: white !important;
+}
+
+.my-input
+{
+    border: none;
+    cursor: default;
+    outline-style: none;
+}
