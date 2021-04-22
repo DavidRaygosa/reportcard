@@ -67,6 +67,6 @@ var multipartMiddleWare = multipart({uploadDir: './uploads'});
 
 	// PUSH NOTIFICATIONS
 	router.post('/save-push', PushController.savePush);
-	router.post('/send-push', PushController.sendPush);
+	router.get('/send-push', PushController.sendPush);
 		
 module.exports = router;

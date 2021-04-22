@@ -21,7 +21,7 @@ var push_controller =
 	savePush: (req, res) => {
 		if(auth(req)){
             let name = Math.floor(Date.now()/1000);
-			let tokenBrowser = req.body.data;
+			let tokenBrowser = req.body;
             let data = JSON.stringify(tokenBrowser, null, 2);
             fs.writeFile(`./tokens/token-${name}`,data, (err) =>{
                 if(err) throw err;
@@ -33,31 +33,36 @@ var push_controller =
 		if(auth(req)){
 			let payload = {
                 "notification":{
-                    "title": "Mensaje Push",
-                    "body": "La aplicación se ha actualizado!",
+                    "title": "¡Aplicacion Actualizada!",
+                    "body": "Checa las ultimas mejoras",
                     "vibrate": [100,50,100],
-                    "actions":{
+                    "image": "./favicon.png",
+                    "actions":[{
                         "action": "explore",
-                        "title": "Actualización"
-                    }
+                        "title": "Ver actualización"
+                    }]
                 }
             }
-            let directoryPath = path.join(__dirname, 'tokens');
+            let directoryPath = './tokens'
             fs.readdir(directoryPath, (err, files) =>{
-                if(err) return res.status(500).send({data: `Error`});
-                files.forEach((file) =>{
-                    let tokenRaw = fs.readFileSync(`${directoryPath}/${file}`);
-                    let tokenParse = JSON.parse(tokenRaw);
-                    webpush.sendNotification(
-                        tokenParse,
-                        JSON.stringify(payload))
-                        .then(res =>{
-                            return res.status(200).send({data: `Send success`});
-                        }).catch(err =>{
-                            return res.status(200).send({data: `Not Permissions`});
-                        })
+                if(err) return res.status(500).send({data: err});
+                files.forEach((file, idx, array) =>{
+                    if (idx === array.length - 1){ 
+                        let tokenRaw = fs.readFileSync(`${directoryPath}/${file}`);
+                        let tokenParse = JSON.parse(tokenRaw);
+                        webpush.sendNotification(
+                            tokenParse,
+                            JSON.stringify(payload))
+                            .then(response =>{
+                                let path = directoryPath+'/'+file;
+                                fs.unlink(path, (error) => { });
+                            }).catch(err =>{
+                                console.log(err);
+                            });
+                    }
                 })
-            })
+            });
+            return res.status(200).send({data: `Send success`});
 		} else res.status(401).send('Unauthorized');
 	}
 }
